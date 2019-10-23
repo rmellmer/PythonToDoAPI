@@ -17,6 +17,12 @@ class TestAPI(TestCase):
         test_todos = [ dict(todoID="b271", message="test todo"), dict(todoID="abcde", message="test todo # 2") ]
         mock_todocontext.return_value.getTodos.return_value = test_todos
         response = app.test_client().get("/todos")
-
         self.assertEquals(response.json, test_todos)
-        
+
+    @mock.patch("app.main.controller.todo.ToDoContext")
+    def test_get_one(self, mock_todocontext):
+        test_id = "abcde"
+        test_todo = dict(todoID=test_id, message="test todo")
+        mock_todocontext.return_value.getTodo.return_value = test_todo
+        response = app.test_client().get(f"/todo/{test_id}")
+        self.assertEquals(response.json, test_todo)
