@@ -5,6 +5,7 @@ from app.main import create_app
 from flask_script import Manager
 
 app = create_app(os.getenv('FLASK_ENV') or 'dev')
+app.app_context().push()
 
 manager = Manager(app)
 

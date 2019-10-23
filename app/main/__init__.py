@@ -2,8 +2,8 @@ import json
 from flask import Flask
 from flask.json import jsonify
 
-from .config import config_by_name
-from .controller.todo import todo_api
+from app.main.config import config_by_name
+from app.main.controller.todo import todo_api
 from decimal import Decimal
 
 class DecimalEncoder(json.JSONEncoder):
