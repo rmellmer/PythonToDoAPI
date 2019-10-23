@@ -5,5 +5,6 @@ todo_api = Blueprint('todo_api', __name__)
 
 @todo_api.route('/todos')
 def getTodos():
-    todos = ToDoContext().getTodos()
+    todo_clent = ToDoContext()
+    todos = todo_clent.getTodos()
     return jsonify(todos)

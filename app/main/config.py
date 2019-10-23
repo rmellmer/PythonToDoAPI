@@ -12,6 +12,7 @@ class DevConfig(Config):
 class TestConfig(Config):
     DEBUG = True
     TEST = True
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
 
 class ProdConfig(Config):
     DEBUG = False

@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock
+from unittest import mock
 
 from flask import current_app
 from flask_testing import TestCase
@@ -12,8 +12,11 @@ class TestAPI(TestCase):
         app.config.from_object('app.main.config.TestConfig')
         return app
     
-    def test_get_all(self):
-        response = self.client.get("/todos")
-        print(response)
-        self.assertEquals(response.json, dict(success=True))
+    @mock.patch("app.main.controller.todo.ToDoContext")
+    def test_get_all(self, mock_todocontext):
+        test_todos = [ dict(todoID="b271", message="test todo"), dict(todoID="abcde", message="test todo # 2") ]
+        mock_todocontext.return_value.getTodos.return_value = test_todos
+        response = app.test_client().get("/todos")
+
+        self.assertEquals(response.json, test_todos)
         
